@@ -19,7 +19,7 @@ displayMessages = function() {
   });
 }
 
-sendMessage = function(group, message) {
+sendMessage = function(message) {
   ChatMessages.insert({
     group: group,
     author: author,
