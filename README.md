@@ -27,7 +27,7 @@ Our test app is a simple group chat application. Where people can join into grou
 ## Lets to a test
 
 * First you need to select which collection implementation you want
-* For that see 'chat_app/lib/collections.js'
+* For that see `chat_app/lib/collections.js`
 * Our app will be printing logs as `csv`
 
 Let's start the app
