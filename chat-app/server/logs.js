@@ -20,6 +20,15 @@ function showSysteUsage(interval) {
 
 function showGroupStat(interval) {
   return setInterval(function() {
-    console.log(Date.now() + ':stat: ' + JSON.stringify(groupStat));
+    var totalUsers = 0;
+    var totalGroups = 0;
+    for(var key in groupStat) {
+      totalGroups++;
+      totalUsers += groupStat[key];
+    }
+
+    var result = {user: totalUsers, groups: totalGroups, messages: messageCount};
+    console.log(Date.now() + ':stat: ' + JSON.stringify(result));
+    messageCount = 0;
   }, interval);
 }

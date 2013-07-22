@@ -5,7 +5,6 @@ var latency = {
   count: 0
 };
 
-
 joinGroup = function(_group, callback) {
   group = _group;
   return Meteor.subscribe('join', group, callback);
@@ -20,10 +19,7 @@ displayMessages = function() {
 }
 
 sendMessage = function(message) {
-  ChatMessages.insert({
-    group: group,
-    author: author,
-    message: message,
-    timestamp: Date.now()
+  Meteor.call('chat', author, group, message, function(err) {
+    if(err) throw err;
   });
 }

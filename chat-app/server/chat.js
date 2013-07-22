@@ -1,4 +1,5 @@
 groupStat = {};
+messageCount = 0;
 
 ChatMessages.allow({
   insert: function() {
@@ -25,4 +26,16 @@ Meteor.publish('join', function(group) {
     sort: {timestamp: -1},
     limit: 30
   });
+});
+
+Meteor.methods({
+  chat: function(author, group, message) {
+    ChatMessages.insert({
+      group: group,
+      author: author,
+      message: message,
+      timestamp: Date.now()
+    });
+    messageCount++;
+  }
 });
