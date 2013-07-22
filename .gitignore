@@ -1,0 +1,4 @@
+stress_test/node_modules
+chat_app/*.log
+chat_app/smart.lock
+*DS_Store
