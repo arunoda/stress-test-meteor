@@ -8,7 +8,6 @@ ChatMessages.allow({
 });
 
 Meteor.publish('join', function(group) {
- 
   if(!groupStat[group]) {
     groupStat[group] = 1;
   } else {
@@ -22,14 +21,22 @@ Meteor.publish('join', function(group) {
     }
   });
 
-  return ChatMessages.find({group: group}, {
+  var cursor =  ChatMessages.find({group: group}, {
     sort: {timestamp: -1},
     limit: 30
   });
+  return cursor;
 });
 
 Meteor.methods({
   chat: function(author, group, message) {
+    console.log({
+      group: group,
+      author: author,
+      message: message,
+      timestamp: Date.now()
+    });
+
     ChatMessages.insert({
       group: group,
       author: author,

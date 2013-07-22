@@ -36,5 +36,6 @@ function getGroupStat() {
   }
 
   var result = {users: totalUsers, groups: totalGroups, messages: messageCount};
+  messageCount = 0;
   return result;
 }
