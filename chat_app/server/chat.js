@@ -29,14 +29,7 @@ Meteor.publish('join', function(group) {
 });
 
 Meteor.methods({
-  chat: function(author, group, message) {
-    console.log({
-      group: group,
-      author: author,
-      message: message,
-      timestamp: Date.now()
-    });
-
+  message: function(author, group, message) {
     ChatMessages.insert({
       group: group,
       author: author,
@@ -44,5 +37,55 @@ Meteor.methods({
       timestamp: Date.now()
     });
     messageCount++;
+  },
+
+  messageAndUpdate: function(author, group, message) {
+    var id = ChatMessages.insert({
+      group: group,
+      author: author,
+      message: message,
+      timestamp: Date.now()
+    });
+    Meteor.setTimeout(function() {
+      ChatMessages.update(id, {$set: {message: message + ': edited'}});
+      messageCount++;
+    }, 50);
+    messageCount++;
+  },
+
+  messageAndRemove: function(author, group, message) {
+    var id = ChatMessages.insert({
+      group: group,
+      author: author,
+      message: message,
+      timestamp: Date.now()
+    });
+    Meteor.setTimeout(function() {
+      ChatMessages.remove(id);
+      messageCount++;
+    }, 50);
+    messageCount++;
+  },
+
+  messageAndRemoveSelector: function(author, group, message) {
+    var uuid = Meteor.uuid();
+    var id = ChatMessages.insert({
+      group: group,
+      author: author,
+      message: message,
+      timestamp: Date.now(),
+      uuid: uuid
+    });
+
+    Meteor.setTimeout(function() {
+      ChatMessages.remove({uuid: uuid});
+      messageCount++;
+    }, 50);
+    messageCount++;
   }
+});
+
+Meteor.startup(function() {
+  ChatMessages._ensureIndex({group: 1, timestamp: -1});
+  ChatMessages._ensureIndex({uuid: 1});
 });

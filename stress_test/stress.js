@@ -13,7 +13,10 @@ page.open(URL, function(status) {
     groupHandler = joinGroup(group);
     // displayHandler = displayMessages();
     setInterval(function() {
-      sendMessage('hello');
+      // sendMessage('hello');
+      // sendMessageAndUpdate('hello');
+      // sendMessageAndRemove('hello');
+      sendMessageAndRemoveSelector('hello');
     }, interval);
   }, myGroup, MESSAGE_INTERVAL);
 });

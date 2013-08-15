@@ -19,7 +19,25 @@ displayMessages = function() {
 }
 
 sendMessage = function(message) {
-  Meteor.call('chat', author, group, message, function(err) {
+  Meteor.call('message', author, group, message, function(err) {
+    if(err) throw err;
+  });
+}
+
+sendMessageAndUpdate = function(message) {
+  Meteor.call('messageAndUpdate', author, group, message, function(err) {
+    if(err) throw err;
+  });
+}
+
+sendMessageAndRemove = function(message) {
+  Meteor.call('messageAndRemove', author, group, message, function(err) {
+    if(err) throw err;
+  });
+}
+
+sendMessageAndRemoveSelector = function(message) {
+  Meteor.call('messageAndRemoveSelector', author, group, message, function(err) {
     if(err) throw err;
   });
 }
