@@ -24,7 +24,7 @@ Our test app is a simple group chat application. Where people can join into grou
 * MongoDB CPU and Memory usage were also captured using node-usage
 * Test ran for 15 min in both cases (With Smart Collections and Without)
 
-## Lets to a test
+## Lets do a test
 
 * First you need to select which collection implementation you want
 * For that see `chat_app/lib/collections.js`
